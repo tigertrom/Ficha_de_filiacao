@@ -270,6 +270,22 @@
         function clearSignature() {
             signaturePad.clear();
         }
+                window.addEventListener('load', () => {
+            Inputmask({
+                mask: '999.999.999-99',
+                alias: 'cpf'
+            }).mask(document.getElementById('cpf'));
+
+            Inputmask({
+                mask: '(99) 99999-9999',
+                alias: 'telefone'
+            }).mask(document.getElementById('celular'));
+
+            Inputmask({
+                mask: '(99) 9999-9999',
+                alias: 'telefone'
+            }).mask(document.getElementById('tel-res'));
+        });
 document.getElementById('cep').addEventListener('blur', async function() {
     const cep = this.value.replace(/\D/g, ''); // Remove caracteres não numéricos
 
@@ -296,22 +312,7 @@ document.getElementById('cep').addEventListener('blur', async function() {
         alert('CEP inválido.');
     }
 });
-        window.addEventListener('load', () => {
-            Inputmask({
-                mask: '999.999.999-99',
-                alias: 'cpf'
-            }).mask(document.getElementById('cpf'));
 
-            Inputmask({
-                mask: '(99) 99999-9999',
-                alias: 'telefone'
-            }).mask(document.getElementById('celular'));
-
-            Inputmask({
-                mask: '(99) 9999-9999',
-                alias: 'telefone'
-            }).mask(document.getElementById('tel-res'));
-        });
 
 document.getElementById('generatePDFButton').addEventListener('click', async (event) => {
     event.preventDefault();
