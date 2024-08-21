@@ -315,6 +315,11 @@ document.getElementById('cep').addEventListener('blur', async function() {
 
 document.getElementById('generatePDFButton').addEventListener('click', async (event) => {
     event.preventDefault();
+    const loader = document.querySelector('.loader');
+    const messageText = document.getElementById('messageText');
+
+loader.style.display = 'inline-block';
+messageText.textContent = 'Gerando PDF...';
 
     document.querySelector('.loader').style.display = 'inline-block';
     document.getElementById('messageText').textContent = 'Gerando PDF...';
@@ -430,6 +435,9 @@ document.getElementById('generatePDFButton').addEventListener('click', async (ev
         link.download = fileName; // Usa o nome capturado para o arquivo
 
         link.click();
+
+        loader.style.display = 'none';
+        messageText.textContent = 'PDF gerado com sucesso!';
 
         document.getElementById('messageText').textContent = 'PDF gerado com sucesso!';
     } catch (error) {
