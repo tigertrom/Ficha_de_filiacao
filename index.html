@@ -110,7 +110,7 @@
             <input type="text" id="cpf" name="cpf" required>
             <label for="cargo">Cargo:</label>
             <select id="cargo" name="cargo" required>
-                <option value="selecionecargo">Selecione seu cargo</option>
+                <option value="selecionecargo"> </option>
                 <option value="3classe">3ª Classe</option>
                 <option value="2classe">2ª Classe</option>
                 <option value="1classe">1ª Classe</option>
@@ -123,10 +123,10 @@
             </select>
             <label for="sexo">Sexo:</label>
             <select id="sexo" name="sexo" required>
-                <option value="selecionesexo">Selecione seu sexo</option>
+                <option value="selecionesexo"> </option>
                 <option value="masculino">Masculino</option>
                 <option value="feminino">Feminino</option>
-                <option value="outros">Outros</option>
+                <option value="outros">prefiro não declarar</option>
             </select><br><br>
             <label for="celular">Celular:</label>
             <input type="text" id="celular" name="celular">
@@ -152,7 +152,7 @@
             <input type="text" id="unidade" name="unidade">
             <label for="estado-civil">Estado Civil:</label>
             <select id="estado-civil" name="estado-civil">
-                <option value="selecioneestado">Selecione seu estado civil</option>
+                <option value="selecioneestado"> </option>
                 <option value="casado">Casado</option>
                 <option value="solteiro">Solteiro</option>
                 <option value="uniaoestavel">União Estável</option>
@@ -178,7 +178,7 @@
                     <input type="text" id="Nome_Dep_1" name="Nome_Dep_1">
                     <label for="Parentesco_1">Parentesco:</label>
                     <select id="Parentesco_1" name="Parentesco_1">
-                        <option value="selecione">Selecione o grau de parentesco</option>
+                        <option value="selecione"> </option>
                         <option value="pai">Pai</option>
                         <option value="mae">Mãe</option>
                         <option value="conjuge">Conjuge</option>
@@ -193,7 +193,7 @@
                     <input type="text" id="Nome_Dep_2" name="Nome_Dep_2">
                     <label for="Parentesco_2">Parentesco:</label>
                         <select id="Parentesco_2" name="Parentesco_2">
-                        <option value="selecione">Selecione o grau de parentesco</option>
+                        <option value="selecione"> </option>
                         <option value="pai">Pai</option>
                         <option value="mae">Mãe</option>
                         <option value="conjuge">Conjuge</option>
@@ -208,7 +208,7 @@
                     <input type="text" id="Nome_Dep_3" name="Nome_Dep_3">
                     <label for="parentesco_3">Parentesco:</label>
                     <select id="Parentesco_3" name="Parentesco_3">
-                        <option value="selecione">Selecione o grau de parentesco</option>
+                        <option value="selecione"> </option>
                         <option value="pai">Pai</option>
                         <option value="mae">Mãe</option>
                         <option value="conjuge">Conjuge</option>
@@ -223,7 +223,7 @@
                     <input type="text" id="Nome_Dep_4" name="Nome_Dep_4">
                     <label for="parentesco_4">Parentesco:</label>
                     <select id="Parentesco_4" name="Parentesco_4">
-                        <option value="selecione">Selecione o grau de parentesco</option>
+                        <option value="selecione"> </option>
                         <option value="pai">Pai</option>
                         <option value="mae">Mãe</option>
                         <option value="conjuge">Conjuge</option>
@@ -438,6 +438,12 @@ messageText.textContent = 'Gerando PDF...';
 
         loader.style.display = 'none';
         messageText.textContent = 'PDF gerado com sucesso!';
+
+        // Limpar o formulário
+        document.getElementById('expenseForm').reset();
+
+        // Limpar a assinatura
+        signaturePad.clear();
 
         document.getElementById('messageText').textContent = 'PDF gerado com sucesso!';
     } catch (error) {
