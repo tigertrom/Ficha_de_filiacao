@@ -148,13 +148,14 @@
             <input type="text" id="cep" name="cep">
             <label for="uf">UF:</label>
             <input type="text" id="uf" name="uf">
-            <label for="unidade">Unidade:</label>
+            <label for="unidade">Unidade de lotação:</label>
             <input type="text" id="unidade" name="unidade">
             <label for="estado-civil">Estado Civil:</label>
             <select id="estado-civil" name="estado-civil">
                 <option value="selecioneestado"> </option>
                 <option value="casado">Casado</option>
                 <option value="solteiro">Solteiro</option>
+                <option value="amasiado">Amasiado</option>
                 <option value="uniaoestavel">União Estável</option>
                 <option value="outros">Outros</option>
             </select>
@@ -166,7 +167,7 @@
             <input type="date" id="data-nasc" name="data-nasc">
             <label for="escolaridade">Escolaridade:</label>
             <input type="text" id="escolaridade" name="escolaridade">
-            <label for="inicio-gcm">Início no GCM:</label>
+            <label for="inicio-gcm">Início na Guarda Civil Metropolitana:</label>
             <input type="text" id="inicio-gcm" name="inicio-gcm">
             <label for="mae">Nome da Mãe:</label>
             <input type="text" id="mae" name="mae">
@@ -184,6 +185,7 @@
                         <option value="mae">Mãe</option>
                         <option value="conjuge">Conjuge</option>
                         <option value="filho">Filho(a)</option>
+                        <option value="enteado">Enteado(a)</option>
                     <label for="Nasc_1">Data de Nascimento:</label>
                     <input type="date" id="Nasc_1" name="Nasc_1">
                     <label for="Tel_Dep_1">Telefone:</label>
@@ -199,6 +201,7 @@
                         <option value="mae">Mãe</option>
                         <option value="conjuge">Conjuge</option>
                         <option value="filho">Filho(a)</option>
+                        <option value="enteado">Enteado(a)</option>
                     <label for="Nasc_2">Data de Nascimento:</label>
                     <input type="date" id="Nasc_2" name="Nasc_2">
                     <label for="Tel_Dep_2">Telefone:</label>
@@ -214,6 +217,7 @@
                         <option value="mae">Mãe</option>
                         <option value="conjuge">Conjuge</option>
                         <option value="filho">Filho(a)</option>
+                        <option value="enteado">Enteado(a)</option>
                     <label for="Nasc_3">Data de Nascimento:</label>
                     <input type="date" id="Nasc_3" name="Nasc_3">
                     <label for="Tel_Dep_3">Telefone:</label>
@@ -229,6 +233,7 @@
                         <option value="mae">Mãe</option>
                         <option value="conjuge">Conjuge</option>
                         <option value="filho">Filho(a)</option>
+                        <option value="enteado">Enteado(a)</option>
                     <label for="Nasc_4">Data de Nascimento:</label>
                     <input type="date" id="Nasc_4" name="Nasc_4">
                     <label for="Tel_Dep_4">Telefone:</label>
@@ -344,7 +349,7 @@ messageText.textContent = 'Gerando PDF...';
             'cidade': 'cidade',
             'cep': 'cep',
             'uf': 'uf',
-            'unidade': 'unidade',
+            'unidade': '',
             'estado-civil': 'estado-civil',
             'nome-guerra': 'nome-guerra',
             'naturalidade': 'naturalidade',
