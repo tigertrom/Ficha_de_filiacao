@@ -330,6 +330,26 @@ document.getElementById('cep').addEventListener('blur', async function() {
 
 document.getElementById('generatePDFButton').addEventListener('click', async (event) => {
     event.preventDefault();
+
+    // Seleciona todos os campos obrigatórios
+    const requiredFields = document.querySelectorAll('input[required], select[required]');
+    let allValid = true;
+
+    requiredFields.forEach(field => {
+        if (!field.value || field.value === "selecionecargo" || field.value === "selecionesexo") {
+            field.style.borderColor = 'red'; // Destaca o campo não preenchido
+            allValid = false;
+        } else {
+            field.style.borderColor = ''; // Reseta a cor do campo caso esteja preenchido
+        }
+    });
+
+    if (!allValid) {
+        alert('Por favor, preencha todos os campos obrigatórios antes de gerar o PDF.');
+        return; // Impede a geração do PDF
+    }
+
+    
     const loader = document.querySelector('.loader');
     const messageText = document.getElementById('messageText');
 
