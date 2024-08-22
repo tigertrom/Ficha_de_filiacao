@@ -338,6 +338,7 @@ document.getElementById('generatePDFButton').addEventListener('click', async (ev
     requiredFields.forEach(field => {
         if (!field.value || field.value === "selecionecargo" || field.value === "selecionesexo") {
             field.style.borderColor = 'red'; // Destaca o campo não preenchido
+            field.style.borderWidth = '5px'; // Aumenta a espessura da borda
             allValid = false;
         } else {
             field.style.borderColor = ''; // Reseta a cor do campo caso esteja preenchido
