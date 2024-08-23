@@ -433,6 +433,31 @@
                 'Tel_Dep_4': 'Tel_Dep_4'
             };
 
+                    // Função para obter o nome do mês por extenso em português
+        function mesPorExtenso(mes) {
+            const meses = [
+                'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
+                'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+            ];
+            return meses[mes - 1]; // Ajusta o índice, já que meses começam do 1
+        }
+
+        // Adiciona a data atual aos campos específicos
+        const today = new Date();
+        const day = today.getDate();
+        const month = today.getMonth() + 1; // O mês começa do 0 em JavaScript, então adicionamos 1
+        const year = today.getFullYear();
+
+        // Atualize os campos de data no PDF
+        const dayField = form.getTextField('dia');
+        if (dayField) dayField.setText(day.toString());
+
+        const monthField = form.getTextField('mes');
+        if (monthField) monthField.setText(mesPorExtenso(month)); // Usa a função mesPorExtenso para obter o nome do mês
+
+        const yearField = form.getTextField('ano');
+        if (yearField) yearField.setText(year.toString());
+
             // Função para garantir que o número tenha dois dígitos
             function formatarDoisDigitos(numero) {
                 return numero.toString().padStart(2, '0');
