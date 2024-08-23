@@ -113,8 +113,8 @@
         </div>
         <form id="expenseForm">
             <!-- Campos do formulário -->
-            <label for="nome">Nome Completo:</label>
-            <input type="text" id="nome" name="nome" required>
+            <label for="Nome">Nome Completo:</label>
+            <input type="text" id="Nome" name="Nome" required>
             <label for="rf">RF:</label>
             <input type="text" id="rf" name="rf" required>
             <label for="cpf">CPF:</label>
@@ -172,20 +172,27 @@
                 <option value="uniaoestavel">União Estável</option>
                 <option value="outros">Outros</option>
             </select>
-            <label for="nome-guerra">Nome de Guerra:</label>
-            <input type="text" id="nome-guerra" name="nome-guerra">
+            <label for="Nome-guerra">Nome de Guerra:</label>
+            <input type="text" id="Nome-guerra" name="Nome-guerra">
             <label for="naturalidade">Naturalidade:</label>
             <input type="text" id="naturalidade" name="naturalidade">
             <label for="data-nasc">Data de Nascimento:</label>
             <input type="date" id="data-nasc" name="data-nasc" required>
-            <label for="escolaridade">Escolaridade:</label>
-            <input type="text" id="escolaridade" name="escolaridade" required>
+            <label for="Escolaridade">Escolaridade:</label>
+            <select id="Escolaridade" name="Escolaridade" required>
+                <option value="Fundamental">Fundamental</option>
+                <option value="Médio">Médio</option>
+                <option value="Superior">Superior</option>
+                <option value="Pós-graduado">Pós-graduado</option>
+                <option value="Pós-graduado (Mestrado)">Pós-graduado (Mestrado)</option>
+                <option value="Pós-graduado (Doutorado)">Pós-graduado (Doutorado)</option>
+                <option value="Pós-doutorado)">Pós-doutorado (Pós-doutorado)</option>
             <label for="inicio-gcm">Início na Guarda Civil Metropolitana:</label>
             <input type="date" id="inicio-gcm" name="inicio-gcm" required>
-            <label for="mae">Nome da Mãe:</label>
-            <input type="text" id="mae" name="mae" required>
-            <label for="pai">Nome do Pai:</label>
-            <input type="text" id="pai" name="pai">
+            <label for="Mãe">Nome da Mãe:</label>
+            <input type="text" id="Mãe" name="Mãe" required>
+            <label for="Pai">Nome do Pai:</label>
+            <input type="text" id="Pai" name="Pai">
             <div class="dependente-container">
                 <!-- (Campos dos dependentes aqui) -->
                 <div class="form-row">
@@ -194,9 +201,9 @@
                     <label for="Parentesco_1">Parentesco:</label>
                     <select id="Parentesco_1" name="Parentesco_1">
                         <option value="selecione"> </option>
-                        <option value="pai">Pai</option>
-                        <option value="mae">Mãe</option>
-                        <option value="conjuge">Conjuge</option>
+                        <option value="Pai">Pai</option>
+                        <option value="Mãe">Mãe</option>
+                        <option value="Cônjuge">Cônjuge</option>
                         <option value="uniaoestavel">União Estável</option>
                         <option value="amasiado">Amasiado</option>
                         <option value="filho">Filho(a)</option>
@@ -213,9 +220,9 @@
                     <label for="Parentesco_2">Parentesco:</label>
                         <select id="Parentesco_2" name="Parentesco_2">
                         <option value="selecione"> </option>
-                        <option value="pai">Pai</option>
-                        <option value="mae">Mãe</option>
-                        <option value="conjuge">Conjuge</option>
+                        <option value="Pai">Pai</option>
+                        <option value="Mãe">Mãe</option>
+                        <option value="Cônjuge">Cônjuge</option>
                         <option value="uniaoestavel">União Estável</option>
                         <option value="amasiado">Amasiado</option>
                         <option value="filho">Filho(a)</option>
@@ -232,9 +239,9 @@
                     <label for="parentesco_3">Parentesco:</label>
                     <select id="Parentesco_3" name="Parentesco_3">
                         <option value="selecione"> </option>
-                        <option value="pai">Pai</option>
-                        <option value="mae">Mãe</option>
-                        <option value="conjuge">Conjuge</option>
+                        <option value="Pai">Pai</option>
+                        <option value="Mãe">Mãe</option>
+                        <option value="Cônjuge">Cônjuge</option>
                         <option value="uniaoestavel">União Estável</option>
                         <option value="amasiado">Amasiado</option>
                         <option value="filho">Filho(a)</option>
@@ -251,9 +258,9 @@
                     <label for="parentesco_4">Parentesco:</label>
                     <select id="Parentesco_4" name="Parentesco_4">
                         <option value="selecione"> </option>
-                        <option value="pai">Pai</option>
-                        <option value="mae">Mãe</option>
-                        <option value="conjuge">Conjuge</option>
+                        <option value="Pai">Pai</option>
+                        <option value="Mãe">Mãe</option>
+                        <option value="Cônjuge">Cônjuge</option>
                         <option value="uniaoestavel">União Estável</option>
                         <option value="amasiado">Amasiado</option>
                         <option value="filho">Filho(a)</option>
@@ -381,7 +388,7 @@
             const form = pdfDoc.getForm();
 
             const fieldsMapping = {
-                'nome': 'nome',
+                'Nome': 'Nome',
                 'rf': 'rf',
                 'cpf': 'cpf',
                 'rg': 'rg',
@@ -396,16 +403,16 @@
                 'uf': 'uf',
                 'unidade': 'unidade',
                 'estado-civil': 'estado-civil',
-                'nome-guerra': 'nome-guerra',
+                'Nome-guerra': 'Nome-guerra',
                 'naturalidade': 'naturalidade',
                 'data-nasc': 'data-nasc',
-                'escolaridade': 'escolaridade',
+                'Escolaridade': 'Escolaridade',
                 'inicio-gcm': 'inicio-gcm',
                 'celular': 'celular',
                 'tel-res': 'tel-res',
                 'email': 'email',
-                'mae': 'mae',
-                'pai': 'pai',
+                'Mãe': 'Mãe',
+                'Pai': 'Pai',
                 'Nome_Dep_1': 'Nome_Dep_1',
                 'Nome_Dep_2': 'Nome_Dep_2',
                 'Nome_Dep_3': 'Nome_Dep_3',
@@ -477,11 +484,11 @@
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
 
-            // Captura o nome do usuário e cria o nome do arquivo
-            const nome = document.getElementById('nome')?.value || 'Formulario_Filiacao_Online';
-            const safeNome = nome.replace(/[<>:"/\\|?*]/g, ''); // Remove caracteres inválidos para nome de arquivo
+            // Captura o Nome do usuário e cria o Nome do arquivo
+            const Nome = document.getElementById('Nome')?.value || 'Formulario_Filiacao_Online';
+            const safeNome = Nome.replace(/[<>:"/\\|?*]/g, ''); // Remove caracteres inválidos para Nome de arquivo
             const fileName = `Ficha de Filiação - ${safeNome}.pdf`;
-            link.download = fileName; // Usa o nome capturado para o arquivo
+            link.download = fileName; // Usa o Nome capturado para o arquivo
 
             link.click();
 
