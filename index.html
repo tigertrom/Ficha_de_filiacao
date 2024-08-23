@@ -119,18 +119,20 @@
             <input type="text" id="rf" name="rf" required>
             <label for="cpf">CPF:</label>
             <input type="text" id="cpf" name="cpf" required>
+            <label for="rg">RG:</label>
+            <input type="text" id="rg" name="rg" required>
             <label for="cargo">Cargo:</label>
             <select id="cargo" name="cargo" required>
                 <option value="selecionecargo"> </option>
-                <option value="3classe">3ª Classe</option>
-                <option value="2classe">2ª Classe</option>
-                <option value="1classe">1ª Classe</option>
-                <option value="ce">Classe Especial</option>
-                <option value="cd">Classe Distinta</option>
-                <option value="sub">Subinspetor</option>
-                <option value="insp-divisao">Inspetor de Divisão</option>
-                <option value="insp-agrup">Inspetor de Agrupamento</option>
-                <option value="insp-superintendente">Inspetor Superintendente</option>
+                <option value="3ª Classe">3ª Classe</option>
+                <option value="2ª Classe">2ª Classe</option>
+                <option value="1ª Classe">1ª Classe</option>
+                <option value="Classe Especial">Classe Especial</option>
+                <option value="Classe Distinta">Classe Distinta</option>
+                <option value="Subinspetor">Subinspetor</option>
+                <option value="Inspetor de Divisão">Inspetor de Divisão</option>
+                <option value="Inspetor de Agrupamento">Inspetor de Agrupamento</option>
+                <option value="Inspetor Superintendente">Inspetor Superintendente</option>
             </select>
             <label for="sexo">Sexo:</label>
             <select id="sexo" name="sexo" required>
@@ -384,6 +386,7 @@ messageText.textContent = 'Gerando PDF...';
             'nome': 'nome',
             'rf': 'rf',
             'cpf': 'cpf',
+            'rg': 'rg'
             'sexo': 'sexo',
             'cargo': 'cargo',
             'endereco': 'endereco',
@@ -393,7 +396,7 @@ messageText.textContent = 'Gerando PDF...';
             'cidade': 'cidade',
             'cep': 'cep',
             'uf': 'uf',
-            'unidade': '',
+            'unidade': 'unidade',
             'estado-civil': 'estado-civil',
             'nome-guerra': 'nome-guerra',
             'naturalidade': 'naturalidade',
