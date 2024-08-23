@@ -280,247 +280,229 @@
     <div class="loader"></div>
     <div id="messageText"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-    <script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+<script>
 
-        
-        // Inicializar o SignaturePad
-        const canvas = document.querySelector('#signature canvas');
-        const signaturePad = new SignaturePad(canvas);
+    // Inicializar o SignaturePad
+    const canvas = document.querySelector('#signature canvas');
+    const signaturePad = new SignaturePad(canvas);
 
-        function resizeCanvas() {
-            const container = document.getElementById('signature');
-            canvas.width = container.offsetWidth;
-            canvas.height = container.offsetHeight;
-            signaturePad.clear();
-        }
+    function resizeCanvas() {
+        const container = document.getElementById('signature');
+        canvas.width = container.offsetWidth;
+        canvas.height = container.offsetHeight;
+        signaturePad.clear();
+    }
 
-        window.addEventListener('resize', resizeCanvas);
-        window.addEventListener('load', resizeCanvas);
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('load', resizeCanvas);
 
-        function clearSignature() {
-            signaturePad.clear();
-        }
-                window.addEventListener('load', () => {
-            Inputmask({
-                mask: '999.999.999-99',
-                alias: 'cpf'
-            }).mask(document.getElementById('cpf'));
+    function clearSignature() {
+        signaturePad.clear();
+    }
 
-            Inputmask({
-                mask: '(99) 99999-9999',
-                alias: 'telefone'
-            }).mask(document.getElementById('celular'));
+    window.addEventListener('load', () => {
+        Inputmask({
+            mask: '999.999.999-99',
+            alias: 'cpf'
+        }).mask(document.getElementById('cpf'));
 
-            Inputmask({
-                mask: '(99) 9999-9999',
-                alias: 'telefone'
-            }).mask(document.getElementById('tel-res'));
-        });
-document.getElementById('cep').addEventListener('blur', async function() {
-    const cep = this.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+        Inputmask({
+            mask: '(99) 99999-9999',
+            alias: 'telefone'
+        }).mask(document.getElementById('celular'));
 
-    if (cep.length === 8) { // Verifica se o CEP tem 8 dígitos
-        try {
-            const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-            const data = await response.json();
+        Inputmask({
+            mask: '(99) 9999-9999',
+            alias: 'telefone'
+        }).mask(document.getElementById('tel-res'));
+    });
 
-            if (data.erro) {
-                alert('CEP não encontrado.');
-                return;
+    document.getElementById('cep').addEventListener('blur', async function() {
+        const cep = this.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+
+        if (cep.length === 8) { // Verifica se o CEP tem 8 dígitos
+            try {
+                const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+                const data = await response.json();
+
+                if (data.erro) {
+                    alert('CEP não encontrado.');
+                    return;
+                }
+
+                // Preenche os campos do formulário com os dados retornados pela API
+                document.getElementById('endereco').value = data.logradouro;
+                document.getElementById('bairro').value = data.bairro;
+                document.getElementById('cidade').value = data.localidade;
+                document.getElementById('uf').value = data.uf;
+            } catch (error) {
+                console.error('Erro ao buscar o CEP:', error);
+                alert('Não foi possível buscar o endereço. Verifique sua conexão ou tente novamente.');
             }
-
-            // Preenche os campos do formulário com os dados retornados pela API
-            document.getElementById('endereco').value = data.logradouro;
-            document.getElementById('bairro').value = data.bairro;
-            document.getElementById('cidade').value = data.localidade;
-            document.getElementById('uf').value = data.uf;
-        } catch (error) {
-            console.error('Erro ao buscar o CEP:', error);
-            alert('Não foi possível buscar o endereço. Verifique sua conexão ou tente novamente.');
-        }
-    } else {
-        alert('CEP inválido.');
-    }
-});
-    // Função para garantir que o número tenha dois dígitos
-    function formatarDoisDigitos(numero) {
-        return numero.toString().padStart(2, '0');
-    }
-
-    // Função para formatar a data no formato dd/mm/aaaa
-    function formatarDataParaABNT(data) {
-        const dia = formatarDoisDigitos(data.getDate());
-        const mes = formatarDoisDigitos(data.getMonth() + 1); // Meses começam do 0
-        const ano = data.getFullYear();
-        return `${dia}/${mes}/${ano}`;
-    }
-
-
-document.getElementById('generatePDFButton').addEventListener('click', async (event) => {
-    event.preventDefault();
-
-    // Seleciona todos os campos obrigatórios
-    const requiredFields = document.querySelectorAll('input[required], select[required]');
-    let allValid = true;
-
-    requiredFields.forEach(field => {
-        if (!field.value || field.value === "selecionecargo" || field.value === "selecionesexo") {
-            field.style.borderColor = 'red'; // Destaca o campo não preenchido
-            field.style.borderWidth = '3px'; // Aumenta a espessura da borda
-            allValid = false;
         } else {
-            field.style.borderColor = ''; // Reseta a cor do campo caso esteja preenchido
+            alert('CEP inválido.');
         }
     });
 
-    if (!allValid) {
-        alert('Por favor, preencha todos os campos obrigatórios antes de gerar o PDF.');
-        return; // Impede a geração do PDF
-    }
+    document.getElementById('generatePDFButton').addEventListener('click', async (event) => {
+        event.preventDefault();
 
-    
-    const loader = document.querySelector('.loader');
-    const messageText = document.getElementById('messageText');
+        // Seleciona todos os campos obrigatórios
+        const requiredFields = document.querySelectorAll('input[required], select[required]');
+        let allValid = true;
 
-loader.style.display = 'inline-block';
-messageText.textContent = 'Gerando PDF...';
-
-    document.querySelector('.loader').style.display = 'inline-block';
-    document.getElementById('messageText').textContent = 'Gerando PDF...';
-
-    try {
-        const pdfBytes = await fetch('pdf/FORMULARIO_FILIACAO_ONLINE.pdf').then(res => res.arrayBuffer());
-        const pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
-        const form = pdfDoc.getForm();
-
-        const fieldsMapping = {
-            'nome': 'nome',
-            'rf': 'rf',
-            'cpf': 'cpf',
-            'rg': 'rg'
-            'sexo': 'sexo',
-            'cargo': 'cargo',
-            'endereco': 'endereco',
-            'numero': 'numero',
-            'complemento': 'complemento',
-            'bairro': 'bairro',
-            'cidade': 'cidade',
-            'cep': 'cep',
-            'uf': 'uf',
-            'unidade': 'unidade',
-            'estado-civil': 'estado-civil',
-            'nome-guerra': 'nome-guerra',
-            'naturalidade': 'naturalidade',
-            'data-nasc': 'data-nasc',
-            'escolaridade': 'escolaridade',
-            'inicio-gcm': 'inicio-gcm',
-            'celular': 'celular',
-            'tel-res': 'tel-res',
-            'email': 'email',
-            'mae': 'mae',
-            'pai': 'pai',
-            'Nome_Dep_1': 'Nome_Dep_1',
-            'Nome_Dep_2': 'Nome_Dep_2',
-            'Nome_Dep_3': 'Nome_Dep_3',
-            'Nome_Dep_4': 'Nome_Dep_4',
-            'Parentesco_1': 'Parentesco_1',
-            'Parentesco_2': 'Parentesco_2',
-            'Parentesco_3': 'Parentesco_3',
-            'Parentesco_4': 'Parentesco_4',
-            'Nasc_1': 'Nasc_1',
-            'Nasc_2': 'Nasc_2',
-            'Nasc_3': 'Nasc_3',
-            'Nasc_4': 'Nasc_4',
-            'Tel_Dep_1': 'Tel_Dep_1',
-            'Tel_Dep_2': 'Tel_Dep_2',
-            'Tel_Dep_3': 'Tel_Dep_3',
-            'Tel_Dep_4': 'Tel_Dep_4'
-        };
-
-        for (const [pdfField, htmlField] of Object.entries(fieldsMapping)) {
-            const value = document.getElementById(htmlField)?.value || '';
-            if (form.getTextField(pdfField)) {
-                form.getTextField(pdfField).setText(value);
+        requiredFields.forEach(field => {
+            if (!field.value || field.value === "selecionecargo" || field.value === "selecionesexo") {
+                field.style.borderColor = 'red'; // Destaca o campo não preenchido
+                field.style.borderWidth = '3px'; // Aumenta a espessura da borda
+                allValid = false;
+            } else {
+                field.style.borderColor = ''; // Reseta a cor do campo caso esteja preenchido
             }
-        }
-
-        // Função para obter o nome do mês por extenso em português
-        function mesPorExtenso(mes) {
-            const meses = [
-                'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
-                'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
-            ];
-            return meses[mes - 1]; // Ajusta o índice, já que meses começam do 1
-        }
-
-        // Adiciona a data atual aos campos específicos
-        const today = new Date();
-        const day = today.getDate();
-        const month = today.getMonth() + 1; // O mês começa do 0 em JavaScript, então adicionamos 1
-        const year = today.getFullYear();
-
-        // Atualize os campos de data no PDF
-        const dayField = form.getTextField('dia');
-        if (dayField) dayField.setText(day.toString());
-
-        const monthField = form.getTextField('mes');
-        if (monthField) monthField.setText(mesPorExtenso(month)); // Usa a função mesPorExtenso para obter o nome do mês
-
-        const yearField = form.getTextField('ano');
-        if (yearField) yearField.setText(year.toString());
-
-        if (signaturePad.isEmpty()) {
-            alert('A assinatura é obrigatória.');
-            return;
-        }
-
-        const signatureImage = signaturePad.toDataURL('image/png');
-        const image = await pdfDoc.embedPng(signatureImage);
-
-        const signatureWidth = 150; // Defina a largura desejada
-        const signatureHeight = 50; // Defina a altura desejada
-        const firstPage = pdfDoc.getPage(0); // Obter a primeira página do documento
-
-        firstPage.drawImage(image, {
-            x: 80,
-            y: 90,
-            width: signatureWidth,
-            height: signatureHeight
         });
 
-        const pdfBytesUpdated = await pdfDoc.save();
-        const blob = new Blob([pdfBytesUpdated], { type: 'application/pdf' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
+        if (!allValid) {
+            alert('Por favor, preencha todos os campos obrigatórios antes de gerar o PDF.');
+            return; // Impede a geração do PDF
+        }
 
-        // Captura o nome do usuário e cria o nome do arquivo
-        const nome = document.getElementById('nome')?.value || 'Formulario_Filiacao_Online';
-        const safeNome = nome.replace(/[<>:"/\\|?*]/g, ''); // Remove caracteres inválidos para nome de arquivo
-        const fileName = `Ficha de Filiação - ${safeNome}.pdf`;
-        link.download = fileName; // Usa o nome capturado para o arquivo
+        const loader = document.querySelector('.loader');
+        const messageText = document.getElementById('messageText');
 
-        link.click();
+        loader.style.display = 'inline-block';
+        messageText.textContent = 'Gerando PDF...';
 
-        loader.style.display = 'none';
-        messageText.textContent = 'PDF gerado com sucesso!';
+        try {
+            const pdfBytes = await fetch('pdf/FORMULARIO_FILIACAO_ONLINE.pdf').then(res => res.arrayBuffer());
+            const pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
+            const form = pdfDoc.getForm();
 
-        // Limpar o formulário
-        document.getElementById('expenseForm').reset();
+            const fieldsMapping = {
+                'nome': 'nome',
+                'rf': 'rf',
+                'cpf': 'cpf',
+                'rg': 'rg',
+                'sexo': 'sexo',
+                'cargo': 'cargo',
+                'endereco': 'endereco',
+                'numero': 'numero',
+                'complemento': 'complemento',
+                'bairro': 'bairro',
+                'cidade': 'cidade',
+                'cep': 'cep',
+                'uf': 'uf',
+                'unidade': 'unidade',
+                'estado-civil': 'estado-civil',
+                'nome-guerra': 'nome-guerra',
+                'naturalidade': 'naturalidade',
+                'data-nasc': 'data-nasc',
+                'escolaridade': 'escolaridade',
+                'inicio-gcm': 'inicio-gcm',
+                'celular': 'celular',
+                'tel-res': 'tel-res',
+                'email': 'email',
+                'mae': 'mae',
+                'pai': 'pai',
+                'Nome_Dep_1': 'Nome_Dep_1',
+                'Nome_Dep_2': 'Nome_Dep_2',
+                'Nome_Dep_3': 'Nome_Dep_3',
+                'Nome_Dep_4': 'Nome_Dep_4',
+                'Parentesco_1': 'Parentesco_1',
+                'Parentesco_2': 'Parentesco_2',
+                'Parentesco_3': 'Parentesco_3',
+                'Parentesco_4': 'Parentesco_4',
+                'Nasc_1': 'Nasc_1',
+                'Nasc_2': 'Nasc_2',
+                'Nasc_3': 'Nasc_3',
+                'Nasc_4': 'Nasc_4',
+                'Tel_Dep_1': 'Tel_Dep_1',
+                'Tel_Dep_2': 'Tel_Dep_2',
+                'Tel_Dep_3': 'Tel_Dep_3',
+                'Tel_Dep_4': 'Tel_Dep_4'
+            };
 
-        // Limpar a assinatura
-        signaturePad.clear();
+            // Função para garantir que o número tenha dois dígitos
+            function formatarDoisDigitos(numero) {
+                return numero.toString().padStart(2, '0');
+            }
 
-        document.getElementById('messageText').textContent = 'PDF gerado com sucesso!';
-    } catch (error) {
-        console.error('Erro ao gerar o PDF:', error);
-        document.getElementById('messageText').textContent = 'Erro ao gerar o PDF.';
-    } finally {
-        document.querySelector('.loader').style.display = 'none';
-    }
-});
-    </script>
+            // Função para formatar a data no formato dd/mm/aaaa
+            function formatarDataParaABNT(data) {
+                const dia = formatarDoisDigitos(data.getDate());
+                const mes = formatarDoisDigitos(data.getMonth() + 1); // Meses começam do 0
+                const ano = data.getFullYear();
+                return `${dia}/${mes}/${ano}`;
+            }
+
+            for (const [pdfField, htmlField] of Object.entries(fieldsMapping)) {
+                let value = document.getElementById(htmlField)?.value || '';
+
+                if (pdfField === 'data-nasc' || pdfField === 'inicio-gcm') {
+                    // Se o campo é uma data, formate-o
+                    const date = new Date(value);
+                    if (!isNaN(date.getTime())) { // Verifica se a data é válida
+                        value = formatarDataParaABNT(date);
+                    }
+                }
+
+                if (form.getTextField(pdfField)) {
+                    form.getTextField(pdfField).setText(value);
+                }
+            }
+
+            if (signaturePad.isEmpty()) {
+                alert('A assinatura é obrigatória.');
+                return;
+            }
+
+            const signatureImage = signaturePad.toDataURL('image/png');
+            const image = await pdfDoc.embedPng(signatureImage);
+
+            const signatureWidth = 150; // Defina a largura desejada
+            const signatureHeight = 50; // Defina a altura desejada
+            const firstPage = pdfDoc.getPage(0); // Obter a primeira página do documento
+
+            firstPage.drawImage(image, {
+                x: 80,
+                y: 90,
+                width: signatureWidth,
+                height: signatureHeight
+            });
+
+            const pdfBytesUpdated = await pdfDoc.save();
+            const blob = new Blob([pdfBytesUpdated], { type: 'application/pdf' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+
+            // Captura o nome do usuário e cria o nome do arquivo
+            const nome = document.getElementById('nome')?.value || 'Formulario_Filiacao_Online';
+            const safeNome = nome.replace(/[<>:"/\\|?*]/g, ''); // Remove caracteres inválidos para nome de arquivo
+            const fileName = `Ficha de Filiação - ${safeNome}.pdf`;
+            link.download = fileName; // Usa o nome capturado para o arquivo
+
+            link.click();
+
+            loader.style.display = 'none';
+            messageText.textContent = 'PDF gerado com sucesso!';
+
+            // Limpar o formulário
+            document.getElementById('expenseForm').reset();
+
+            // Limpar a assinatura
+            signaturePad.clear();
+
+            document.getElementById('messageText').textContent = 'PDF gerado com sucesso!';
+        } catch (error) {
+            console.error('Erro ao gerar o PDF:', error);
+            document.getElementById('messageText').textContent = 'Erro ao gerar o PDF.';
+        } finally {
+            document.querySelector('.loader').style.display = 'none';
+        }
+    });
+
+</script>
 </body>
 </html>
