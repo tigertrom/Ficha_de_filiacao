@@ -488,7 +488,7 @@
 
             // Captura o nome do usuário e cria o nome do arquivo
             const nome = document.getElementById('nome')?.value || 'Formulario_Filiacao_Online';
-            const safeNome = Nome.replace(/[<>:"/\\|?*]/g, ''); // Remove caracteres inválidos para Nome de arquivo
+            const safeNome = nome.replace(/[<>:"/\\|?*]/g, ''); // Remove caracteres inválidos para Nome de arquivo
             const fileName = `Ficha de Filiação - ${safeNome}.pdf`;
             link.download = fileName; // Usa o Nome capturado para o arquivo
 
