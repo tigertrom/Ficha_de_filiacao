@@ -285,19 +285,6 @@
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
     <script>
 
-            // Função para garantir que o número tenha dois dígitos
-    function formatarDoisDigitos(numero) {
-        return numero.toString().padStart(2, '0');
-    }
-
-    // Função para formatar a data no formato dd/mm/aaaa
-    function formatarDataParaABNT(data) {
-        const dia = formatarDoisDigitos(data.getDate());
-        const mes = formatarDoisDigitos(data.getMonth() + 1); // Meses começam do 0
-        const ano = data.getFullYear();
-        return `${dia}/${mes}/${ano}`;
-    }
-
         
         // Inicializar o SignaturePad
         const canvas = document.querySelector('#signature canvas');
@@ -358,6 +345,18 @@ document.getElementById('cep').addEventListener('blur', async function() {
         alert('CEP inválido.');
     }
 });
+    // Função para garantir que o número tenha dois dígitos
+    function formatarDoisDigitos(numero) {
+        return numero.toString().padStart(2, '0');
+    }
+
+    // Função para formatar a data no formato dd/mm/aaaa
+    function formatarDataParaABNT(data) {
+        const dia = formatarDoisDigitos(data.getDate());
+        const mes = formatarDoisDigitos(data.getMonth() + 1); // Meses começam do 0
+        const ano = data.getFullYear();
+        return `${dia}/${mes}/${ano}`;
+    }
 
 
 document.getElementById('generatePDFButton').addEventListener('click', async (event) => {
