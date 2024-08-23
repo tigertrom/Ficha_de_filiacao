@@ -113,8 +113,8 @@
         </div>
         <form id="expenseForm">
             <!-- Campos do formulário -->
-            <label for="Nome">Nome Completo:</label>
-            <input type="text" id="Nome" name="Nome" required>
+            <label for="nome">Nome Completo:</label>
+            <input type="text" id="nome" name="nome" required>
             <label for="rf">RF:</label>
             <input type="text" id="rf" name="rf" required>
             <label for="cpf">CPF:</label>
@@ -172,8 +172,8 @@
                 <option value="uniaoestavel">União Estável</option>
                 <option value="outros">Outros</option>
             </select>
-            <label for="Nome-guerra">Nome de Guerra:</label>
-            <input type="text" id="Nome-guerra" name="Nome-guerra">
+            <label for="nome-guerra">Nome de Guerra:</label>
+            <input type="text" id="nome-guerra" name="nome-guerra">
             <label for="naturalidade">Naturalidade:</label>
             <input type="text" id="naturalidade" name="naturalidade">
             <label for="data-nasc">Data de Nascimento:</label>
@@ -390,7 +390,7 @@
             const form = pdfDoc.getForm();
 
             const fieldsMapping = {
-                'Nome': 'Nome',
+                'nome': 'nome',
                 'rf': 'rf',
                 'cpf': 'cpf',
                 'rg': 'rg',
@@ -405,7 +405,7 @@
                 'uf': 'uf',
                 'unidade': 'unidade',
                 'estado-civil': 'estado-civil',
-                'Nome-guerra': 'Nome-guerra',
+                'nome-guerra': 'nome-guerra',
                 'naturalidade': 'naturalidade',
                 'data-nasc': 'data-nasc',
                 'Escolaridade': 'Escolaridade',
@@ -486,8 +486,8 @@
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
 
-            // Captura o Nome do usuário e cria o Nome do arquivo
-            const Nome = document.getElementById('Nome')?.value || 'Formulario_Filiacao_Online';
+            // Captura o nome do usuário e cria o nome do arquivo
+            const nome = document.getElementById('nome')?.value || 'Formulario_Filiacao_Online';
             const safeNome = Nome.replace(/[<>:"/\\|?*]/g, ''); // Remove caracteres inválidos para Nome de arquivo
             const fileName = `Ficha de Filiação - ${safeNome}.pdf`;
             link.download = fileName; // Usa o Nome capturado para o arquivo
